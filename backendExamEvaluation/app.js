@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var mongoose=require('mongoose');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -12,6 +13,8 @@ var apiV1LoginRoute = require('./routes/api/v1/connect');
 
 var app = express();
 
+mongoose.connect("mongodb://admin:admin123@ds137263.mlab.com:37263/mwa",{ useNewUrlParser: true });
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -21,6 +24,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(function(req, res, next) {
+  req.db=mongoose.connection;
+  return next();
+  });
 
 app.use('/api/v1/questions',apiV1QuestionsRoute);
 app.use('/api/v1/admin',apiV1AdminRoute);
