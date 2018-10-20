@@ -4,8 +4,11 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var apiV1QuestionsRoute = require('./routes/api/v1/question')
+var apiV1AdminRoute = require('./routes/api/v1/admin')
+var apiV1StudentRoute = require('./routes/api/v1/student')
+var apiV1StaffRoute = require('./routes/api/v1/staff')
+var apiV1LoginRoute = require('./routes/api/v1/connect');
 
 var app = express();
 
@@ -19,8 +22,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api/v1/questions',apiV1QuestionsRoute);
+app.use('/api/v1/admin',apiV1AdminRoute);
+app.use('/api/v1/staff',apiV1StaffRoute);
+app.use('/api/v1/login',apiV1LoginRoute);
+app.use('/api/v1/student',apiV1StudentRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -37,5 +43,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
+app.listen(3000,()=>console.log("listening to port 3000"))
 module.exports = app;
