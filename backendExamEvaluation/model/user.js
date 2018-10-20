@@ -1,13 +1,8 @@
 var mongoose = require("mongoose");
 var userSchema = new mongoose.Schema({
     name: String,
-<<<<<<< HEAD
-    username: String,
-    password: String,
-=======
     username: {type: String, unique:true},
     password: {type:String, required:true},
->>>>>>> origin/master
     active: Boolean,
     is_admin:Boolean,
     created_at: Date,
