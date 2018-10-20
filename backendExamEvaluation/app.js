@@ -1,4 +1,5 @@
 var createError = require('http-errors');
+var validator = require('express-validator');
 var mongoose=require('mongoose');
 var express = require('express');
 var path = require('path');
@@ -21,15 +22,10 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(function(req, res, next) {
-  req.db=mongoose.connection;
-  return next();
-  });
-
+app.use(validator());
 app.use('/api/v1/questions',apiV1QuestionsRoute);
 app.use('/api/v1/admin',apiV1AdminRoute);
 app.use('/api/v1/staff',apiV1StaffRoute);
