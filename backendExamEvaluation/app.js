@@ -25,11 +25,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(function(req, res, next) {
-  req.db=mongoose.connection;
-  return next();
-  });
-
 app.use('/api/v1/questions',apiV1QuestionsRoute);
 app.use('/api/v1/admin',apiV1AdminRoute);
 app.use('/api/v1/staff',apiV1StaffRoute);
