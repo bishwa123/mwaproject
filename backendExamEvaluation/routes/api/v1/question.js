@@ -78,5 +78,21 @@ router.patch('/:id',(req,res)=>{
         }
     });
 });
+router.get('/validatetokenandgetquestions/:token',(req,res)=>{
+    //validation token yet to be implemented
+    model.question.find({}).limit(3).exec((err, questions)=>{
+        if(err) {
+            apiResponse.status = "500";
+            apiResponse.data = "";
+            apiResponse.message = err.message;
+            return res.json(apiResponse);
+        } else {
+            apiResponse.status = "200";
+            apiResponse.data = questions;
+            apiResponse.message = "";
+            return res.json(apiResponse);
+        }
+    });
+});
 
 module.exports = router;

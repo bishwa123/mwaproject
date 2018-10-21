@@ -10,6 +10,7 @@ import { HeaderComponent } from './common/components/header/header.component';
 import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { StuffModule } from './modules/stuff/stuff.module';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { StuffModule } from './modules/stuff/stuff.module';
     HomeModule,
     AdminModule,
     StuffModule,
-    StudentModule
+    StudentModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

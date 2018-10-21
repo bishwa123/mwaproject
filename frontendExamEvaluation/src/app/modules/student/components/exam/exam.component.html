@@ -1,0 +1,10 @@
+<div *ngIf ='isLoaded'>
+  <form>
+    <ul *ngFor ='let question of questions'>
+      <p>{{question.question}}</p>
+    <textarea class="uk-textarea" [id]="question.id" [name] ='question.question' [(ngModel)] ='question.answer'></textarea>
+    <p>{{question.answer}}</p>
+  </ul>
+  <button class="uk-button uk-button-secondary" type="submit">Submit</button>
+</form>
+</div>
