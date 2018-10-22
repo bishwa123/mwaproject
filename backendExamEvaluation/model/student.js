@@ -7,12 +7,15 @@ var studentSchema = new mongoose.Schema({
     date_of_birth:Date,
     reports:[
         {
+            date:Date,
+            questions:[{
             question:String,
             answer:String,
             timespent:String,
             snapshots:[],
             timeoffbrowser:Number,
             accepted:Boolean
+        }]
         }
     ],
     result:String

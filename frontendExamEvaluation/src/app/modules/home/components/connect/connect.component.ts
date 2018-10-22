@@ -45,5 +45,4 @@ export class ConnectComponent implements OnInit {
         }
     });
   }
-
 }

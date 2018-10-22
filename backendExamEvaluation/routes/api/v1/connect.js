@@ -67,5 +67,6 @@ router.post('/admincheck', (req, res) => {
                 return res.json(apiResponse);
         });
 });
+
 });
 module.exports = router;

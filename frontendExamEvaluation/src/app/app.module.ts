@@ -9,13 +9,14 @@ import { HomeModule } from './modules/home/home.module';
 import { HeaderComponent } from './common/components/header/header.component';
 import { StudentModule } from './modules/student/student.module';
 import { StaffModule } from './modules/staff/staff.module';
-
+import { BlurEventDirective } from './modules/student/directives/blur-event.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    BlurEventDirective,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +24,7 @@ import { StaffModule } from './modules/staff/staff.module';
     HomeModule,
     StudentModule,
     StaffModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

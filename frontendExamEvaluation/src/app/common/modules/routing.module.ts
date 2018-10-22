@@ -18,8 +18,8 @@ const APP_ROUTES: Routes = [
         component: StaffHomeComponent
     },
     {
-        path: 'student',
-        component: StudentHomeComponent,
+        path: 'student/:token',
+        component: StudentHomeComponent
     }
 ];
 
