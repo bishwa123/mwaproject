@@ -22,6 +22,7 @@ export class ConnectComponent implements OnInit {
     });
     this.control = this.loginForm.controls;
   }
+
   ngOnInit() {
   }
 

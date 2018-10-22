@@ -62,9 +62,8 @@ router.post("/", (req,res)=>{
     });
 });
 router.patch('/:id',(req,res)=>{
-    let {name,active,is_admin} = req.body;
-    model.user.update({_id: req.params.id}, {name, active, is_admin }, (err, data)=>{
-        console.log(data)
+    let {name, password, active, is_admin} = req.body;
+    model.user.update({_id: req.params.id}, {name, password, active, is_admin }, (err, data)=>{
         if(err) {
             apiResponse.status = "500";
             apiResponse.data = "";

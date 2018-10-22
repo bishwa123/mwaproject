@@ -6,12 +6,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-<<<<<<< HEAD
-=======
+
 var jwt = require('jsonwebtoken')
 var apiResponse = require('./model/api_response')
 
->>>>>>> origin/master
 
 var apiV1QuestionsRoute = require('./routes/api/v1/question')
 var apiV1AdminRoute = require('./routes/api/v1/admin')
@@ -40,6 +38,7 @@ app.use('/api/v1/student', apiV1StudentRoute);
 app.use('/api/v1/questions', verifyToken, apiV1QuestionsRoute);
 app.use('/api/v1/admin',verifyToken, apiV1AdminRoute);
 app.use('/api/v1/staff',verifyToken, apiV1StaffRoute);
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
