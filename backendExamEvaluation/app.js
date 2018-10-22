@@ -32,7 +32,7 @@ app.use(cors());
 app.use('/api/v1/questions',apiV1QuestionsRoute);
 app.use('/api/v1/admin',apiV1AdminRoute);
 app.use('/api/v1/staff',apiV1StaffRoute);
-app.use('/api/v1/login',apiV1LoginRoute);
+app.use('/api/v1/auth',apiV1LoginRoute);
 app.use('/api/v1/student',apiV1StudentRoute);
 
 // catch 404 and forward to error handler

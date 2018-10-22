@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { QuestionsService } from '../../services/questions.service';
-import { ConfigService } from '../../../../common/services/host.service';
-
 
 @Component({
   selector: 'questions-list',

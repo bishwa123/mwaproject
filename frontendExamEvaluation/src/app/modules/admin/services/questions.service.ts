@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AdminModule } from "../admin.module";
 import { ConfigService } from "../../../common/services/host.service";
 
 
@@ -19,7 +18,6 @@ export class QuestionsService {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }
-
     addQuestion(body) {
         return this.http.post(this.config.BASE_API_URL+"questions", body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')

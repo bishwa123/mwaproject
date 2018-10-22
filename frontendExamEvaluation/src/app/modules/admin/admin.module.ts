@@ -9,16 +9,21 @@ import { FooterAdminComponent } from './components/footer-admin/footer-admin.com
 import { Routes, RouterModule } from '@angular/router';
 import { QuestionsListComponent } from './components/questions-list/questions-list.component';
 import { QuestionComponent } from './components/question/question.component';
-import { StuffListComponent } from './components/stuff-list/stuff-list.component';
-import { AddStuffComponent } from './components/add-stuff/add-stuff.component';
+import { StaffListComponent } from './components/staff-list/staff-list.component';
+import { StaffComponent } from './components/staff/staff.component';
 import { ReviewComponent } from './components/review/review.component';
 import { ResultComponent } from './components/result/result.component';
 import { QuestionsService } from './services/questions.service';
+import { StaffService } from './services/staff.service';
+import { AdminGuardService, AdminGuard2Service } from './services/adminGard.service';
+import { AccessSerivce } from './services/access.service';
 
 const ADMIN_ROUTES: Routes = [
   {
       path: '',
       component: AdminHomeComponent,
+      canActivate: [AdminGuardService],
+      canActivateChild: [AdminGuard2Service],
       children: [
           { 
             path: "questions_list", 
@@ -33,12 +38,16 @@ const ADMIN_ROUTES: Routes = [
             component: QuestionComponent 
           },
           { 
-            path: "stuff_list", 
-            component: StuffListComponent 
+            path: "staff_list", 
+            component: StaffListComponent 
           },
           { 
-            path: "add_stuff", 
-            component: AddStuffComponent 
+            path: "staff", 
+            component: StaffComponent 
+          },
+          { 
+            path: "staff/:id", 
+            component: StaffComponent 
           },
           { 
             path: "review", 
@@ -59,8 +68,8 @@ const ADMIN_ROUTES: Routes = [
     FooterAdminComponent,
     QuestionsListComponent,
     QuestionComponent,
-    StuffListComponent,
-    AddStuffComponent,
+    StaffListComponent,
+    StaffComponent,
     ReviewComponent,
     ResultComponent
   ],
@@ -71,6 +80,6 @@ const ADMIN_ROUTES: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(ADMIN_ROUTES)
   ],
-  providers: [QuestionsService]
+  providers: [QuestionsService, StaffService, AdminGuardService, AdminGuard2Service, AccessSerivce]
 })
 export class AdminModule { }

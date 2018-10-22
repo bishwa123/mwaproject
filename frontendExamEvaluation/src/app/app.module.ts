@@ -8,7 +8,7 @@ import { RoutingModule } from './common/modules/routing.module';
 import { HomeModule } from './modules/home/home.module';
 import { HeaderComponent } from './common/components/header/header.component';
 import { StudentModule } from './modules/student/student.module';
-import { StuffModule } from './modules/stuff/stuff.module';
+import { StaffModule } from './modules/staff/staff.module';
 
 
 @NgModule({
@@ -21,8 +21,8 @@ import { StuffModule } from './modules/stuff/stuff.module';
     BrowserModule,
     RoutingModule,
     HomeModule,
-    StuffModule,
-    StudentModule
+    StudentModule,
+    StaffModule
   ],
   providers: [],
   bootstrap: [AppComponent]
