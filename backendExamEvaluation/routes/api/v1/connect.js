@@ -12,13 +12,10 @@ router.post('/', (req, res) => {
     model.user.findOne({ username: username, password:password }, function (err, usern) {
         if (err || usern ===null)
             return res.send('the user is not found');
-        // usern.comparePassword({ password: password }, function (err, isMatch) {
-        //     if (err)
-        //         return res.send('the password is incorrect');
-        // });
-        jwt.sign({usern},"secretkey", (err,token)=>{
-            return res.json(token);
-        })
+        usern.comparePassword({ password: password }, function (err, isMatch) {
+            if (err)
+                return res.send('the password is incorrect');
+        });
     })
 });
 module.exports = router;

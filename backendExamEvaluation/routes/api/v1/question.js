@@ -79,8 +79,9 @@ router.patch('/:id',(req,res)=>{
     });
 });
 router.get('/validatetokenandgetquestions/:token',(req,res)=>{
-    //validation token yet to be implemented
+    //validation token yet to be implemented if valid return student id and questions
     model.question.find({}).limit(3).exec((err, questions)=>{
+        console.log(err)
         if(err) {
             apiResponse.status = "500";
             apiResponse.data = "";
@@ -89,7 +90,7 @@ router.get('/validatetokenandgetquestions/:token',(req,res)=>{
         } else {
             apiResponse.status = "200";
             apiResponse.data = questions;
-            apiResponse.message = "";
+            apiResponse.message = '5bcd428df53d5011dc7d0095';
             return res.json(apiResponse);
         }
     });

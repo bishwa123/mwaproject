@@ -58,9 +58,8 @@ router.post("/", (req,res)=>{
 });
 
 router.patch('/:id',(req,res)=>{
-    
     let {name, student_id, entry, date_of_birth} = req.body;
-    model.student.update({_id: req.params.id}, {name, student_id, entry, date_of_birth }, (err, student)=>{
+    model.student.update({_id: req.params.id}, {$push:{reports:req.body} }, (err, student)=>{
         if(err) {
             apiResponse.status = "500";
             apiResponse.data = "";

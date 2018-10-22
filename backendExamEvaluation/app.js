@@ -80,6 +80,7 @@ function verifyToken(req, res, next) {
     apiResponse.data="";
     return res.json(apiResponse)
   }
+  return next();
 }
 app.listen(3001, () => console.log("listening to port 3000"))
 module.exports = app;

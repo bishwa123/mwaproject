@@ -1,10 +1,11 @@
 <div *ngIf ='isLoaded'>
-  <form>
-    <ul *ngFor ='let question of questions'>
+  <h2>Time: {{minutes}}:{{seconds}}</h2>
+  <form (ngSubmit) ='submitExam(form)' #form ='ngForm'>
+    <ul *ngFor ='let question of exam.questions'>
       <p>{{question.question}}</p>
-    <textarea class="uk-textarea" [id]="question.id" [name] ='question.question' [(ngModel)] ='question.answer'></textarea>
+    <textarea class="uk-textarea" [name] ='question.question' [(ngModel)] ='question.answer'></textarea>
     <p>{{question.answer}}</p>
   </ul>
-  <button class="uk-button uk-button-secondary" type="submit">Submit</button>
+  <button class="uk-button uk-button-secondary" type="submit" (click)='submitExam()'>Submit</button>
 </form>
 </div>

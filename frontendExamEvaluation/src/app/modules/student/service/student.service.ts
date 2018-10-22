@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,9 @@ import { HttpClient } from '@angular/common/http';
 export class StudentService {
 
   token:string ='12';
-  validateTokenAndGetQuestionsUrl:string ='http://localhost:3001/api/v1/questions/validatetokenandgetquestions'
+  configUrl:string ='http://localhost:3001/api/v1';
+  validateTokenAndGetQuestionsUrl:string =this.configUrl+'/questions/validatetokenandgetquestions'
+  addExamReportUrl:string = this.configUrl+'/student/'
   constructor(private http: HttpClient) { }
 
   validateTokenandGetQuestions(token:string){
@@ -19,7 +22,14 @@ export class StudentService {
     //   reject(false);
     // });
     // return validatePromise;
-    console.log(token)
-    return this.http.get(this.validateTokenAndGetQuestionsUrl+"/"+token);
+    return this.http.get(this.validateTokenAndGetQuestionsUrl+"/"+12);
+  }
+  submitExamService(report){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.patch(this.addExamReportUrl+report.studentid, {date:Date.now(), questions:report.questions}, httpOptions)
   }
 }
