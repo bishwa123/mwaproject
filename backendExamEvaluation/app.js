@@ -61,6 +61,7 @@ app.use(function (err, req, res, next) {
 //Fotrmat of token
 //Authorization : Bearer <access_token>
 function verifyToken(req, res, next) {
+  /*
   const bearerheader = req.headers['authorization'];
   if (typeof bearerheader != 'undefined') {
     const bearer = bearerheader.split(' ');
@@ -83,7 +84,8 @@ function verifyToken(req, res, next) {
     apiResponse.data="";
     return res.json(apiResponse)
   }
+  */
   return next();
 }
-app.listen(3001, () => console.log("listening to port 3000"))
+app.listen(3001, () => console.log("listening to port 3001"))
 module.exports = app;
