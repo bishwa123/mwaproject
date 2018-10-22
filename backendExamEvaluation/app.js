@@ -6,10 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
-
-
-
-var jwt = require('jsonwebtoken')
+var jwt = require('jsonwebtoken');
 var apiResponse = require('./model/api_response')
 
 
