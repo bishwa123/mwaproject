@@ -1,0 +1,15 @@
+.container {
+    margin-top: 80px !important;
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: auto;
+  }
+  
+  .container > * {
+    width: 100%;
+  }
+
+  .helper-text {
+    color: red;
+  }

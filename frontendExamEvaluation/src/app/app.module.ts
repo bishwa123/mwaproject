@@ -10,6 +10,7 @@ import { HeaderComponent } from './common/components/header/header.component';
 import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { StuffModule } from './modules/stuff/stuff.module';
+
 import { HttpClientModule } from '@angular/common/http';
 import { StorageServiceModule } from 'angular-webstorage-service';
 import { BlurEventDirective } from './modules/student/directives/blur-event.directive';
@@ -27,6 +28,7 @@ import { BlurEventDirective } from './modules/student/directives/blur-event.dire
     HomeModule,
     AdminModule,
     StuffModule,
+
     StudentModule,
     HttpClientModule,
     StorageServiceModule

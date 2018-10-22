@@ -8,7 +8,6 @@ router.post('/', (req, res) => {
     req.assert(username, 'username is required').notEmpty();
     req.assert(password, 'passwprd is required').notEmpty();
     
-
     model.user.findOne({ username: username, password:password }, function (err, usern) {
         if (err || usern ===null)
             return res.send('the user is not found');

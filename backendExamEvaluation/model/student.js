@@ -12,7 +12,7 @@ var studentSchema = new mongoose.Schema({
             question:String,
             answer:String,
             timespent:String,
-            shapshots:[],
+            snapshots:[],
             timeoffbrowser:Number,
             accepted:Boolean
         }]

@@ -6,9 +6,12 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+<<<<<<< HEAD
+=======
 var jwt = require('jsonwebtoken')
 var apiResponse = require('./model/api_response')
 
+>>>>>>> origin/master
 
 var apiV1QuestionsRoute = require('./routes/api/v1/question')
 var apiV1AdminRoute = require('./routes/api/v1/admin')
@@ -30,8 +33,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
-app.use(cors());
-
+app.use(cors()); 
 
 app.use('/api/v1/login', apiV1LoginRoute);
 app.use('/api/v1/student', apiV1StudentRoute);
