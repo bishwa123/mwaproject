@@ -1,3 +1,57 @@
-<p>
-  header-admin works!
-</p>
+<div class="uk-position-relative">
+  <nav class="uk-navbar-container" uk-navbar="dropbar: true">
+    <div class="uk-navbar-center">
+        <ul class="uk-navbar-nav">
+            <li>
+                <a [routerLink]="'/admin'" routerLinkActive="uk-active">
+                    Admin
+                </a>
+            </li>
+            <li class="uk-active">
+                <a href="#">Questions</a>
+                <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li class="uk-active">
+                            <a [routerLink]="'questions_list'" [routerLinkActive]="['uk-active']">
+                                List Questions
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="'question'" [routerLinkActive]="['uk-active']">
+                                Add Question
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="uk-active">
+                <a href="#">Staff Members</a>
+                <div class="uk-navbar-dropdown">
+                    <ul class="uk-nav uk-navbar-dropdown-nav">
+                        <li>
+                            <a [routerLink]="'staff_list'" [routerLinkActive]="['uk-active']">
+                                List Staff
+                            </a>
+                        </li>
+                        <li>
+                            <a [routerLink]="'staff'" [routerLinkActive]="['uk-active']">
+                                Add Staff
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="uk-active">
+              <a [routerLink]="'review'" [routerLinkActive]="['uk-active']">
+                  Review
+              </a>
+            </li>
+            <li class="uk-active">
+              <a [routerLink]="'result'" [routerLinkActive]="['uk-active']">
+                  Results
+              </a>
+            </li>
+        </ul>
+    </div>
+  </nav>
+</div>

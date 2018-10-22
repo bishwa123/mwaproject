@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ConnectComponent } from '../../modules/home/components/connect/connect.component';
-import { AdminHomeComponent } from 'src/app/modules/admin/components/admin-home/admin-home.component';
-import { StuffHomeComponent } from 'src/app/modules/stuff/components/stuff-home/stuff-home.component';
-import { StudentHomeComponent } from 'src/app/modules/student/components/student-home/student-home.component';
+import { StudentHomeComponent } from '../../modules/student/components/student-home/student-home.component';
+import { StaffHomeComponent } from 'src/app/modules/staff/components/staff-home/staff-home.component';
 
 const APP_ROUTES: Routes = [
     {
@@ -12,11 +11,11 @@ const APP_ROUTES: Routes = [
     },
     {
         path: 'admin',
-        component: AdminHomeComponent
+        loadChildren: '../../modules/admin/admin.module#AdminModule'
     },
     {
-        path: 'stuff',
-        component: StuffHomeComponent
+        path: 'staff',
+        component: StaffHomeComponent
     },
     {
         path: 'student/:token',
