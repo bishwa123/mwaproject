@@ -14,6 +14,5 @@ var userSchema = new mongoose.Schema({
     this.updated_at = currentDate;
     if (!this.created_at) this.created_at = currentDate;
     next();
-  });
-  
+  }); 
   module.exports = mongoose.model('users', userSchema);

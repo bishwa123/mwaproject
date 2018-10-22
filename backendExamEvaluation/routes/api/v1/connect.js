@@ -8,14 +8,14 @@ router.post('/', (req, res) => {
     req.assert(username, 'username is required').notEmpty();
     req.assert(password, 'passwprd is required').notEmpty();
 
-    model.user.findOne({ username: username }, function (err, usern) {
-        if (err)
-            return res.send('the user is not found');
-        usern.comparePassword({ password: password }, function (err, isMatch) {
-            if (err)
-                return res.send('the password is incorrect');
-        });
-        res.send('Authentication is successful');
-    })
+    //model.user.findOne({ username: username }, function (err, usern) {
+        // if (err)
+        //     return res.send('the user is not found');
+        // usern.comparePassword({ password: password }, function (err, isMatch) {
+        //     if (err)
+        //         return res.send('the password is incorrect');
+        // });
+    //})
+    res.send({"test":true})
 });
 module.exports = router;

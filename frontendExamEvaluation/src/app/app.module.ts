@@ -11,7 +11,6 @@ import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { StuffModule } from './modules/stuff/stuff.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +23,7 @@ import { StuffModule } from './modules/stuff/stuff.module';
     HomeModule,
     AdminModule,
     StuffModule,
-    StudentModule
+    StudentModule,    
   ],
   providers: [],
   bootstrap: [AppComponent]
