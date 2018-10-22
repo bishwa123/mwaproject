@@ -1,0 +1,9 @@
+div.container {
+    margin-top: 50px !important;
+    max-width: 800px;
+    margin: auto;
+}
+
+.submit {
+    margin-top: 30px;
+}
