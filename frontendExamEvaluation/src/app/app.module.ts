@@ -11,11 +11,16 @@ import { AdminModule } from './modules/admin/admin.module';
 import { StudentModule } from './modules/student/student.module';
 import { StuffModule } from './modules/stuff/stuff.module';
 
+import { HttpClientModule } from '@angular/common/http';
+import { StorageServiceModule } from 'angular-webstorage-service';
+import { BlurEventDirective } from './modules/student/directives/blur-event.directive';
+
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    BlurEventDirective,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +28,10 @@ import { StuffModule } from './modules/stuff/stuff.module';
     HomeModule,
     AdminModule,
     StuffModule,
-    StudentModule,    
+
+    StudentModule,
+    HttpClientModule,
+    StorageServiceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
