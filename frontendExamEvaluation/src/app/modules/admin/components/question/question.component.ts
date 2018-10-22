@@ -36,6 +36,7 @@ export class QuestionComponent implements OnInit {
       this.subscriber_2 = this.service.getQuestion(this.question_id).
         subscribe( (response:any) => {
           if(response.status == 200) {
+              response.data = response.data[0];
               this.questionForm.setValue({
                 category: response.data.category,
                 question: response.data.question,
