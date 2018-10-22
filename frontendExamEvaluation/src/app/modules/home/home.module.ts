@@ -9,9 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
    CommonModule, 
-   ReactiveFormsModule,
-   HttpClientModule  
-
+   HttpClientModule,
+   ReactiveFormsModule
   ],
   declarations: [ConnectComponent, HeaderHomeComponent, FooterHomeComponent],
   providers:[]
