@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
 app.use(cors()); 
 
-app.use('/api/v1/login', apiV1LoginRoute);
+app.use('/api/v1/auth', apiV1LoginRoute);
 app.use('/api/v1/student', apiV1StudentRoute);
 app.use('/api/v1/questions', verifyToken, apiV1QuestionsRoute);
 app.use('/api/v1/admin',verifyToken, apiV1AdminRoute);
@@ -59,6 +59,7 @@ app.use(function (err, req, res, next) {
 //Fotrmat of token
 //Authorization : Bearer <access_token>
 function verifyToken(req, res, next) {
+  /*
   const bearerheader = req.headers['authorization'];
   if (typeof bearerheader != 'undefined') {
     const bearer = bearerheader.split(' ');
@@ -81,7 +82,8 @@ function verifyToken(req, res, next) {
     apiResponse.data="";
     return res.json(apiResponse)
   }
+  */
   return next();
 }
-app.listen(3001, () => console.log("listening to port 3000"))
+app.listen(3001, () => console.log("listening to port 3001"))
 module.exports = app;
