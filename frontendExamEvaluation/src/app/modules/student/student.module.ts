@@ -8,12 +8,14 @@ import { ExamComponent } from './components/exam/exam.component';
 import {FormsModule} from '@angular/forms';
 import { ExamsComponent } from './components/exams/exams.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [StudentHomeComponent, FooterStudentComponent, HeaderStudentComponent, ExamComponent, ExamsComponent],
   providers:[StudentService]

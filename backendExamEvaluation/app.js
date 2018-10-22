@@ -35,7 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(validator());
 app.use(cors()); 
 
-app.use('/api/v1/login', apiV1LoginRoute);
+app.use('/api/v1/auth', apiV1LoginRoute);
 app.use('/api/v1/student', apiV1StudentRoute);
 app.use('/api/v1/questions', verifyToken, apiV1QuestionsRoute);
 app.use('/api/v1/admin',verifyToken, apiV1AdminRoute);
