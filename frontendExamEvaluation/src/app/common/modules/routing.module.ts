@@ -19,7 +19,7 @@ const APP_ROUTES: Routes = [
         component: StuffHomeComponent
     },
     {
-        path: 'student',
+        path: 'student/:token',
         component: StudentHomeComponent
     }
 ];
