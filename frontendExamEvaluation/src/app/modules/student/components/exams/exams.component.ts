@@ -79,7 +79,6 @@ export class ExamsComponent implements OnInit {
     if (typeof browser != "undefined" && browser.name == 'chrome') {
       this.currentRoute.params.subscribe(params => {
         this.studentService.validateTokenandGetQuestions(params['token']).subscribe(data => {
-         console.log(data['status']);
           if (data['status'] == '200') {
             this.isLoaded = true;
             this.exam.studentid = data['message'];
@@ -107,6 +106,7 @@ export class ExamsComponent implements OnInit {
               }
               i++;
             })
+            
             // let timer = Observable.timer(2000,1000);
             this.startTimer();
             this.subscribeAnswers();
