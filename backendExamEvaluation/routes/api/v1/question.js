@@ -28,7 +28,7 @@ router.get('/:id',(req,res)=>{
             return res.json(apiResponse);
         } else {
             apiResponse.status = "200";
-            apiResponse.data = question;
+            apiResponse.data = question[0];
             apiResponse.message = "";
             return res.json(apiResponse);
         }

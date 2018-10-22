@@ -1,0 +1,20 @@
+<div class="container">
+    
+    <h2> List of available questions </h2>
+
+    <table>
+      <tr *ngFor="let element of questions">
+        <td>
+            <dl class="uk-description-list">
+                <dt>{{element.category}}</dt>
+                <dd>{{element.question}}</dd>
+            </dl>
+        </td>
+        <td style="text-align: right;">
+          <a [routerLink]="['/admin/question', element._id]"
+          class="uk-button uk-button-default"> View/Edit </a>
+        </td>
+      </tr>
+    </table>
+
+</div>
