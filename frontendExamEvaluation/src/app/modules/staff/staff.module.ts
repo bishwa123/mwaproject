@@ -8,6 +8,8 @@ import { StudentComponent } from './components/student/student.component';
 import { InvitationComponent } from './components/invitation/invitation.component'
 import { StaffService } from './service/staff.service';
 import { ConfigService } from '../../common/services/host.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor } from '../../common/services/interceptor.service';
 
 const STAFF_ROUTES: Routes = [
   {
@@ -32,7 +34,7 @@ const STAFF_ROUTES: Routes = [
     RouterModule.forChild(STAFF_ROUTES)
   ],
   declarations: [StaffHomeComponent, HeaderStaffComponent, FooterStaffComponent, StudentComponent, InvitationComponent],
-  providers:[StaffService, ConfigService]
+  providers:[StaffService, ConfigService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true}]
 })
 export class StaffModule { 
 
