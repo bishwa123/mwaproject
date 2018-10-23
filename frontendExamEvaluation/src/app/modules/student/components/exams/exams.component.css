@@ -1,0 +1,19 @@
+textarea{
+    height: 300px;
+    background: #796969;
+    color: white;
+    width: 100%;
+    padding:10px;
+}
+input{
+    border:0;
+    width:90%;
+    color:black !important;
+    background: white !important;
+    pointer-events:none !important;
+
+}
+button{
+    position: relative;
+    left: 50%
+}

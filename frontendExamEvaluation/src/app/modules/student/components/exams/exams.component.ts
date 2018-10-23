@@ -4,9 +4,12 @@ import { TokenService } from '../../service/token.service';
 import { Router } from '@angular/router';
 import { StudentService } from '../../service/student.service';
 import { detect } from 'detect-browser';
-import { NgForm, FormGroup, FormBuilder } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { timer, Subscription, Observable } from 'rxjs';
 import { BlurEventDirective } from '../../directives/blur-event.directive';
+import { debounceTime } from 'rxjs/operators';
+
+declare let swal: any;
 @Component({
   selector: 'app-exams',
   templateUrl: './exams.component.html',
@@ -23,6 +26,8 @@ export class ExamsComponent implements OnInit {
   answer1Subscriber: Subscription;
   answer2Subscriber: Subscription;
   answer3Subscriber: Subscription;
+  getQuesSubsrciber: Subscription;
+  
   exam = {
     'studentid': String,
     questions: [
@@ -62,23 +67,21 @@ export class ExamsComponent implements OnInit {
   constructor(private fb: FormBuilder, private currentRoute: ActivatedRoute, private studentService: StudentService,
     private route: Router) {
     this.examForm = this.fb.group({
-      'answer1': "",
+      'answer1': ['', Validators.required],
       'question2': '',
       'question3': '',
       'question1': '',
-      'answer2': '',
-      'answer3': ''
+      'answer2': ['', Validators.required],
+      'answer3': ['', Validators.required]
 
     });
   }
 
   ngOnInit() {
-
-    
     let browser = detect();
     if (typeof browser != "undefined" && browser.name == 'chrome') {
       this.currentRoute.params.subscribe(params => {
-        this.studentService.validateTokenandGetQuestions(params['token']).subscribe(data => {
+      this.getQuesSubsrciber =  this.studentService.validateTokenandGetQuestions(params['token']).subscribe(data => {
           if (data['status'] == '200') {
             this.isLoaded = true;
             this.exam.studentid = data['message'];
@@ -112,19 +115,21 @@ export class ExamsComponent implements OnInit {
             this.subscribeAnswers();
           }
           else {
+            swal('Oops!!',data['message'],'error');
             this.route.navigate(['/']);
           }
         });
       });
     }
     else {
-      alert("You can give exam only in chrome browser");
+      swal('Opps',"You can give exam only in chrome browser",'error');
     }
   }
   subscribeAnswers(){
-   this.answer1Subscriber = this.examForm.get('answer1').valueChanges.subscribe(x=>{
+   this.answer1Subscriber = this.examForm.get('answer1').valueChanges.pipe(debounceTime(2000)
+    ).subscribe(x=>{
      this.exam.questions[0].snapshots.push(x);
-    // console.log(this.exam.questions[0].snapshots);
+     console.log("a "+x);
    })
    this.answer2Subscriber = this.examForm.get('answer2').valueChanges.subscribe(x=>{
     this.exam.questions[1].snapshots.push(x);
@@ -141,7 +146,7 @@ export class ExamsComponent implements OnInit {
       if (counter < 0) {
         this.isLoaded = false;
         this.timerSubscriber.unsubscribe();
-        alert('Oops!! You ran out of time.')
+        swal('Oops!!', 'You ran out of time.','error');
       }
     });
   }
@@ -152,14 +157,21 @@ export class ExamsComponent implements OnInit {
     this.exam.questions[1].answer = form.value.answer2
     this.exam.questions[2].answer = form.value.answer3
     console.log(this.exam);
-    // this.studentService.submitExamService(this.exam).subscribe(data => {
-    //   console.log(data);
-    // });
+    this.studentService.submitExamService(this.exam).subscribe((data) => {
+      if(data['status'] == '200'){
+        this.examForm.reset();
+        this.isLoaded = false;
+      swal('Congratulation','Your exam has been submitted','success');
+      }
+      else
+      swal('Opps!!',data['message'],'error');
+    });
   }
   ngOnDestroy() {
-    // this.timerSubscriber.unsubscribe();
-    // this.answer1Subscriber.unsubscribe();
-    // this.answer2Subscriber.unsubscribe();
-    // this.answer3Subscriber.unsubscribe();
+    if(typeof this.timerSubscriber != 'undefined')this.timerSubscriber.unsubscribe();
+    if(typeof this.answer1Subscriber != 'undefined')this.answer1Subscriber.unsubscribe();
+    if(typeof this.answer2Subscriber != 'undefined')this.answer2Subscriber.unsubscribe();
+    if(typeof this.answer3Subscriber != 'undefined')this.answer3Subscriber.unsubscribe();
+    if(typeof this.getQuesSubsrciber != 'undefined')this.getQuesSubsrciber.unsubscribe();
   }
 }

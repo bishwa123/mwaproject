@@ -114,16 +114,6 @@ router.patch('/:id',(req,res)=>{
                 return res.json(apiResponse);
             }
     });
-
-    /*
-        publish: "false"
-        question1: "true"
-        question2: "false"
-        question3: "true"
-        report_id: "5bce3fc5cb45ea1868d06453"
-        result: "true"
-    */
-
 });
 
 module.exports = router;
