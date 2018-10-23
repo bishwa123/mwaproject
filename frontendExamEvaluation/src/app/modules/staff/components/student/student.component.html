@@ -16,7 +16,7 @@
       <tr *ngFor ='let stu of students'>
           <td>{{stu.name}}</td>
           <td>{{stu.entry}}</td>
-          <td><button class="uk-button uk-button-primary" [id]='stu._id'>Send Invitation</button></td>
+          <td><button class="uk-button uk-button-primary" [id]='stu._id' (click)='sendInvitation(stu._id)'>Send Invitation</button></td>
       </tr>
   </tbody>
 </table>

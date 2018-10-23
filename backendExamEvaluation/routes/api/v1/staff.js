@@ -79,11 +79,61 @@ router.patch('/:id',(req,res)=>{
 
 router.post('/generatetoken',(req,res)=>{
     let {student_id, name, entry, date_of_birth} = req.body;
+    console.log(req.body);
     let token = jwt.createStudentToken({student_id, name, entry, date_of_birth});
-    apiResponse.status = "200";
-    apiResponse.data = token;
-    apiResponse.message = "";
-    res.json(apiResponse);
+    let invitation = {'token':token,'status':'sent','valid':true}
+    model.student.update({_id: student_id},{ $push:{
+        'invitations': {$each: [invitation],$position:0}
+      }},{upsert:true},(err,data)=>{
+        if(!err){
+            apiResponse.status = "200";
+            apiResponse.data = token;
+            apiResponse.message = "http://localhost:4200/student/"+token;
+            res.json(apiResponse);
+        }
+        else{
+            apiResponse.status = "500";
+            apiResponse.data = '';
+            apiResponse.message = err;
+            res.json(apiResponse);
+        }
+    });
+   
+});
+
+router.get('/student/notinvited',(req,res)=>{
+    model.student.find({'invitations.0': {'$exists' : false}}, (err,students)=> {
+
+        if(err){
+            apiResponse.status = 500;
+            apiResponse.data = "fsfs";
+            apiResponse.message = err;
+          return res.json(apiResponse);    
+        }
+        else{
+            apiResponse.status = 200;
+            apiResponse.data = students;
+            apiResponse.message = ""
+            return res.json(apiResponse);
+        }
+    });
+});
+
+router.get('/student/invited',(req,res)=>{
+    model.student.find({'invitations.0': {'$exists' : true}}, (err,students)=> {
+        if(err){
+            apiResponse.status = 500;
+            apiResponse.data = "";
+            apiResponse.message = err;
+          return res.json(apiResponse);    
+        }
+        else{
+            apiResponse.status = 200;
+            apiResponse.data = students;
+            apiResponse.message = ""
+            return res.json(apiResponse);
+        }
+    });
 });
 
 router.get('/student/notinvited',(req,res)=>{

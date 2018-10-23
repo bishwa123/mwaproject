@@ -11,11 +11,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { OffbrowserGuard } from './guards/offbrowser.guard';
+import {CodemirrorModule} from 'ng2-codemirror';
 
 const STUDENT_ROUTES:Routes = [{
   path:'',
   component: StudentHomeComponent,
-  canDeactivate:[OffbrowserGuard],
   children:[
     {
       path:':token',
@@ -31,7 +31,8 @@ const STUDENT_ROUTES:Routes = [{
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild(STUDENT_ROUTES)
+    RouterModule.forChild(STUDENT_ROUTES),
+    CodemirrorModule
   ],
   declarations: [StudentHomeComponent, FooterStudentComponent, HeaderStudentComponent, ExamComponent, ExamsComponent],
   providers:[StudentService, OffbrowserGuard]

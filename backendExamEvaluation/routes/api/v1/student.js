@@ -90,6 +90,23 @@ router.post("/", (req,res)=>{
     });
 });
 
+router.patch('/:id',(req,res)=>{
+    
+    model.student.update({_id: req.params.id}, {$push:{reports:{$each :[req.body],$position:0}} }, (err, student)=>{
+        if(err) {
+            apiResponse.status = "500";
+            apiResponse.data = "";
+             apiResponse.message = err.message;
+             return res.json(apiResponse);
+         } else {
+             apiResponse.status = "200";
+             apiResponse.data = student;
+             apiResponse.message = "";
+             return res.json(apiResponse);
+         }
+     });
+ });
+
 router.patch('/edit/:id',(req,res)=>{
     model.student.update(
         {'_id': req.params.id, 'reports._id': req.body.report_id}, 
