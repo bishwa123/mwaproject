@@ -15,11 +15,11 @@ const APP_ROUTES: Routes = [
     },
     {
         path: 'staff',
-        component: StaffHomeComponent
+        loadChildren: '../../modules/staff/staff.module#StaffModule'
     },
     {
-        path: 'student/:token',
-        component: StudentHomeComponent
+        path: 'student',
+        loadChildren: '../../modules/student/student.module#StudentModule'
     }
 ];
 

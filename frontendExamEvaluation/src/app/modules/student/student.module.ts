@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StudentHomeComponent } from './components/student-home/student-home.component';
 import { FooterStudentComponent } from './components/footer-student/footer-student.component';
@@ -9,15 +9,31 @@ import {FormsModule} from '@angular/forms';
 import { ExamsComponent } from './components/exams/exams.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
+import { Routes, RouterModule } from '@angular/router';
+import { OffbrowserGuard } from './guards/offbrowser.guard';
 
+const STUDENT_ROUTES:Routes = [{
+  path:'',
+  component: StudentHomeComponent,
+  canDeactivate:[OffbrowserGuard],
+  children:[
+    {
+      path:':token',
+      component: ExamsComponent
+      
+    }
+  ]
+}
+]
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forChild(STUDENT_ROUTES)
   ],
   declarations: [StudentHomeComponent, FooterStudentComponent, HeaderStudentComponent, ExamComponent, ExamsComponent],
-  providers:[StudentService]
+  providers:[StudentService, OffbrowserGuard]
 })
 export class StudentModule { }

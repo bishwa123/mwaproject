@@ -1,12 +1,14 @@
 <div *ngIf ='isLoaded'>
-    <h2>Time: {{minutes}}:{{seconds}}</h2>
+    <h2 style='text-align:center'>Time: {{minutes}}:{{seconds}}</h2>
   <form [formGroup]='examForm' (ngSubmit)='onSubmit(f)' #f ='ngForm'>
-  <input class='uk-input'  name='question1' formControlName ='question1'>
-  <textarea class='uk-textarea'  name='answer1' formControlName ='answer1'></textarea>
-      <input class='uk-input' name ='question2' formControlName ='question2'>
-      <textarea class='uk-textarea'  name='answer2' formControlName ='answer2'></textarea>
-          <input class='uk-input'  name ='question3' formControlName ='question3'>
-          <textarea class='uk-textarea'  name='answer3' formControlName ='answer3'></textarea>
-          <button type="submit" class='uk-button-primary'>Submit</button>
+  <span>1. </span><input class='uk-input'  name='question1' formControlName ='question1'>
+  <textarea class=''  name='answer1' formControlName ='answer1'></textarea>
+  <hr class="uk-divider-icon">
+  <span>2. </span><span><input class='uk-input' name ='question2' formControlName ='question2'></span>
+      <textarea class=''  name='answer2' formControlName ='answer2'></textarea>
+      <hr class="uk-divider-icon">
+      <span>3. </span> <input class='uk-input'  name ='question3' formControlName ='question3'>
+          <textarea class=''  name='answer3' formControlName ='answer3'></textarea>
+          <button type="submit" class='uk-button uk-button-primary' [disabled] = '!examForm.valid'>Submit</button>
 </form>
 </div>
