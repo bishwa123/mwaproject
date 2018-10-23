@@ -92,7 +92,9 @@ router.post("/", (req,res)=>{
 
 router.patch('/:id',(req,res)=>{
     
-    model.student.update({_id: req.params.id}, {$push:{reports:{$each :[req.body],$position:0}} }, (err, student)=>{
+    model.student.update({_id: req.params.id},
+        {$push:{reports:{$each :[req.body],$position:0}}, "invitations.0.status":"answered" }, 
+        (err, student)=>{
         if(err) {
             apiResponse.status = "500";
             apiResponse.data = "";
