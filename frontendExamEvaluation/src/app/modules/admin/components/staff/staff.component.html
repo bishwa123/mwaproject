@@ -4,18 +4,27 @@
             <legend class="uk-legend">Username</legend>
             <div class="uk-margin">
                 <input id="username" name="username" class="uk-input" type="text" formControlName="username">
+                <div class="alert alert-danger" *ngIf="(control.username.touched || control.username.dirty) && control.username.errors">
+                    <span class="helper-text">required *</span>
+                </div>
             </div>
         </fieldset>
         <fieldset class="uk-fieldset">
             <legend class="uk-legend">Name</legend>
             <div class="uk-margin">
                 <input id="name" name="name" class="uk-input" type="text" formControlName="name">
+                <div class="alert alert-danger" *ngIf="(control.name.touched || control.name.dirty) && control.name.errors">
+                    <span class="helper-text">required *</span>
+                </div>
             </div>
         </fieldset>
         <fieldset class="uk-fieldset">
             <legend class="uk-legend">Password</legend>
             <div class="uk-margin">
                 <input id="password" name="password" class="uk-input" type="password" formControlName="password">
+                <div class="alert alert-danger" *ngIf="(control.password.touched || control.password.dirty) && control.password.errors">
+                    <span class="helper-text">required *</span>
+                </div>
             </div>
         </fieldset>
         <fieldset class="uk-fieldset">
@@ -26,6 +35,9 @@
                         <option value="true">Activated</option>
                         <option value="false">Disabled</option>
                     </select>
+                    <div class="alert alert-danger" *ngIf="(control.active.touched || control.active.dirty) && control.active.errors">
+                        <span class="helper-text">required *</span>
+                    </div>
                 </div>
             </div>
         </fieldset>
@@ -37,6 +49,9 @@
                         <option value="false">Staff Member</option>
                         <option value="true">Admin</option>
                     </select>
+                    <div class="alert alert-danger" *ngIf="(control.is_admin.touched || control.is_admin.dirty) && control.is_admin.errors">
+                        <span class="helper-text">required *</span>
+                    </div>
                 </div>
             </div>
         </fieldset>

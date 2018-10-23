@@ -2,7 +2,11 @@ var key = require('../config/keys');
 const jsonwebtoken = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
-const jwt = { verifyToken: verifyToken, createToken: createToken }
+const jwt = { 
+        verifyToken: verifyToken, 
+        createToken: createToken,
+        createStudentToken: createStudentToken
+    }
 
 function verifyToken(token) {
     return new Promise((resolve, reject) => {
@@ -29,6 +33,7 @@ function createToken(user) {
       });
   return token;
 }
+
 function createStudentToken(student) {
     let student_data = {
         student_id: student.student_id, 

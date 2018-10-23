@@ -17,6 +17,8 @@ import { QuestionsService } from './services/questions.service';
 import { StaffService } from './services/staff.service';
 import { AdminGuardService, AdminGuard2Service } from './services/adminGard.service';
 import { AccessSerivce } from './services/access.service';
+import { ReviewService } from './services/review.service';
+import { EditReviewComponent } from './components/edit-review/edit-review.component';
 
 const ADMIN_ROUTES: Routes = [
   {
@@ -54,6 +56,10 @@ const ADMIN_ROUTES: Routes = [
             component: ReviewComponent 
           },
           { 
+            path: "review/:id", 
+            component: EditReviewComponent 
+          },
+          { 
             path: "result", 
             component: ResultComponent 
           }
@@ -71,7 +77,9 @@ const ADMIN_ROUTES: Routes = [
     StaffListComponent,
     StaffComponent,
     ReviewComponent,
-    ResultComponent
+    EditReviewComponent,
+    ResultComponent,
+    EditReviewComponent
   ],
   imports: [
     CommonModule,
@@ -80,6 +88,13 @@ const ADMIN_ROUTES: Routes = [
     ReactiveFormsModule,
     RouterModule.forChild(ADMIN_ROUTES)
   ],
-  providers: [QuestionsService, StaffService, AdminGuardService, AdminGuard2Service, AccessSerivce]
+  providers: [
+    QuestionsService, 
+    StaffService, 
+    AdminGuardService, 
+    AdminGuard2Service, 
+    AccessSerivce,
+    ReviewService
+  ]
 })
 export class AdminModule { }

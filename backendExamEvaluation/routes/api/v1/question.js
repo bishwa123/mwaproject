@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var model = require('./../../../model/model');
 var apiResponse = require('./../../../model/api_response');
+var jwt = require('./../../../libs/jwt');
 
 router.get('/',(req,res)=>{
     model.question.find({}, (err, questions)=>{
@@ -78,21 +79,27 @@ router.patch('/:id',(req,res)=>{
         }
     });
 });
+
 router.get('/validatetokenandgetquestions/:token',(req,res)=>{
-    //validation token yet to be implemented if valid return student id and questions
-    model.question.find({}).limit(3).exec((err, questions)=>{
-        console.log(err)
-        if(err) {
-            apiResponse.status = "500";
-            apiResponse.data = "";
-            apiResponse.message = err.message;
-            return res.json(apiResponse);
-        } else {
-            apiResponse.status = "200";
-            apiResponse.data = questions;
-            apiResponse.message = '5bcdf2bfe7179a4377009c37';
-            return res.json(apiResponse);
-        }
+    jwt.verifyToken(req.params.token).then((student) =>{
+        model.question.findRandom({"active":true}, {}, {limit: 3}, function(err, questions){
+            if(err) {
+                apiResponse.status = "500";
+                apiResponse.data = "eee";
+                apiResponse.message = err.message;
+                return res.json(apiResponse);
+            } else {
+                apiResponse.status = "200";
+                apiResponse.data = questions;
+                apiResponse.message = student.student_id;
+                return res.json(apiResponse);
+            }
+        });
+    }).catch((error)=>{
+        apiResponse.status = "500";
+        apiResponse.data = "";
+        apiResponse.message = error.message;
+        return res.json(apiResponse);
     });
 });
 

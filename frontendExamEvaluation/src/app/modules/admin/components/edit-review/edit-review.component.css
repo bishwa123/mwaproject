@@ -1,0 +1,30 @@
+div.container {
+    margin-top: 50px !important;
+    max-width: 800px;
+    margin: auto;
+}
+table {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.helper-text {
+    font-size: 12px;
+    color: red;
+}
+
+table {
+    border: 2px solid #f4eded;
+}
+
+button {
+    margin-bottom: 50px;
+}
+
+.snapshots {
+    margin: 9px;
+    padding: 5px;
+    border: 1px #efecec solid;
+    background: #efecec;
+    border-radius: 6px;
+}
