@@ -82,19 +82,47 @@ router.patch('/:id',(req,res)=>{
 
 router.get('/validatetokenandgetquestions/:token',(req,res)=>{
     jwt.verifyToken(req.params.token).then((student) =>{
-        model.question.findRandom({"active":true}, {}, {limit: 3}, function(err, questions){
-            if(err) {
+        console.log(student.student_id)
+        model.student.findOne({_id:student.student_id},(err,data)=>{
+            if(err){
                 apiResponse.status = "500";
-                apiResponse.data = "eee";
+                apiResponse.data = "";
                 apiResponse.message = err.message;
                 return res.json(apiResponse);
-            } else {
-                apiResponse.status = "200";
-                apiResponse.data = questions;
-                apiResponse.message = student.student_id;
+            }
+            console.log("token ", data.invitations[0].token);
+            console.log('status ', data.invitations[0].valid)
+            if(data.invitations[0].token == req.params.token && data.invitations[0].valid == true){
+                model.student.update({_id:student.student_id},{$set:{'invitations.0.valid':false}},(err,data)=>{
+                    if(err){
+                        apiResponse.status = "500";
+                        apiResponse.data = "";
+                        apiResponse.message = err.message;
+                        return res.json(apiResponse);
+                    }
+                    model.question.findRandom({"active":true}, {}, {limit: 3}, function(err, questions){
+                        if(err) {
+                            apiResponse.status = "500";
+                            apiResponse.data = "";
+                            apiResponse.message = err.message;
+                            return res.json(apiResponse);
+                        } else {
+                            apiResponse.status = "200";
+                            apiResponse.data = questions;
+                            apiResponse.message = student.student_id;
+                            return res.json(apiResponse);
+                        }
+                    });
+                })
+            }
+            else{
+                apiResponse.status = "403";
+                apiResponse.data = "";
+                apiResponse.message = 'Access Forbidden';
                 return res.json(apiResponse);
             }
-        });
+        })
+       
     }).catch((error)=>{
         apiResponse.status = "500";
         apiResponse.data = "";
