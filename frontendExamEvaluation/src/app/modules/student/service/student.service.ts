@@ -22,7 +22,7 @@ export class StudentService {
     //   reject(false);
     // });
     // return validatePromise;
-    return this.http.get(this.validateTokenAndGetQuestionsUrl+"/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdHVkZW50X2lkIjoiOTg5NzYiLCJuYW1lIjoiTWljaGVhbCIsImVudHJ5IjoiT2N0b2JlciIsImRhdGVfb2ZfYmlydGgiOiIxOTg5LTEwLTIwVDE5OjAxOjI0LjIyNFoiLCJpYXQiOjE1NDAzMTI0NDYsImV4cCI6MTU0MDM5ODg0Nn0.Eo46E53q-LYx5AGzTRo_I-CYIvh7vFkNhPAAChkw1zo");
+    return this.http.get(this.validateTokenAndGetQuestionsUrl+"/");
   }
   submitExamService(report){
     const httpOptions = {

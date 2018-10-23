@@ -5,6 +5,7 @@ import { TokenService } from 'src/app/common/services/token.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
+declare let swal: any;
 
 @Injectable()
 export class AdminGuardService implements CanActivate {
@@ -19,7 +20,8 @@ export class AdminGuardService implements CanActivate {
                     if (response.data) {
                         return true;
                     }else{
-                      this.router.navigateByUrl('/staff');
+                      swal("Access forbidden!", "not allowed", "error");
+                      this.router.navigate(['/']);
                       return false;
                     }
                 }));
@@ -43,8 +45,8 @@ export class AdminGuard2Service implements CanActivateChild {
                     if (response.data) {
                         return true;
                     }
-                    console.log("here2");
-                    this.router.navigateByUrl('/staff');
+                    swal("Access forbidden!", "not allowed", "error");
+                    this.router.navigate(['/']);
                     return false;
                 }));
     }else{

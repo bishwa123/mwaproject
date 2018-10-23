@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { AdminHomeComponent } from './components/admin-home/admin-home.component';
@@ -19,6 +19,7 @@ import { AdminGuardService, AdminGuard2Service } from './services/adminGard.serv
 import { AccessSerivce } from './services/access.service';
 import { ReviewService } from './services/review.service';
 import { EditReviewComponent } from './components/edit-review/edit-review.component';
+import { JwtInterceptor } from 'src/app/common/services/interceptor.service';
 
 const ADMIN_ROUTES: Routes = [
   {
@@ -94,7 +95,8 @@ const ADMIN_ROUTES: Routes = [
     AdminGuardService, 
     AdminGuard2Service, 
     AccessSerivce,
-    ReviewService
+    ReviewService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ]
 })
 export class AdminModule { }

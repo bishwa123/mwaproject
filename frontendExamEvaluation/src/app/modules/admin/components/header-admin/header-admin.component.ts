@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from './../../../../common/services/token.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'header-admin',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderAdminComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: TokenService, private router: Router) { }
 
   ngOnInit() {
+  }
+
+  logout() {
+    this.service.signOut();
+    this.router.navigate(['/']);
   }
 
 }

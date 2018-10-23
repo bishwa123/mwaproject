@@ -18,6 +18,11 @@ var studentSchema = new mongoose.Schema({
             }]
         }
     ],
+    invitations: [{
+        token: String,
+        status: String,
+        valid: Boolean
+    }],
     result: Boolean,
     published: Boolean
 });

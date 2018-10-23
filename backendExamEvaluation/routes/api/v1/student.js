@@ -90,7 +90,7 @@ router.post("/", (req,res)=>{
     });
 });
 
-router.patch('/:id',(req,res)=>{
+router.patch('/edit/:id',(req,res)=>{
     model.student.update(
         {'_id': req.params.id, 'reports._id': req.body.report_id}, 
         {$set :
