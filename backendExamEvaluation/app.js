@@ -35,7 +35,7 @@ app.use(cors());
 
 app.use('/api/v1/auth', apiV1LoginRoute);
 app.use('/api/v1/student', apiV1StudentRoute);
-app.use('/api/v1/questions', headerVerifier, apiV1QuestionsRoute);
+app.use('/api/v1/questions', apiV1QuestionsRoute);
 app.use('/api/v1/admin', headerVerifier, apiV1AdminRoute);
 app.use('/api/v1/staff', headerVerifier, apiV1StaffRoute);
 
