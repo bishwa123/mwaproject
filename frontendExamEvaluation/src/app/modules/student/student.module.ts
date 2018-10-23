@@ -11,7 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '../../../../node_modules/@angular/common/http';
 import { Routes, RouterModule } from '@angular/router';
 import { OffbrowserGuard } from './guards/offbrowser.guard';
-import {CodemirrorModule} from 'ng2-codemirror';
 
 const STUDENT_ROUTES:Routes = [{
   path:'',
@@ -31,8 +30,7 @@ const STUDENT_ROUTES:Routes = [{
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    RouterModule.forChild(STUDENT_ROUTES),
-    CodemirrorModule
+    RouterModule.forChild(STUDENT_ROUTES)
   ],
   declarations: [StudentHomeComponent, FooterStudentComponent, HeaderStudentComponent, ExamComponent, ExamsComponent],
   providers:[StudentService, OffbrowserGuard]
