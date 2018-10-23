@@ -7,6 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var jwt = require('jsonwebtoken');
+var headerVerifier = require('./libs/header-token-verifier');
 var apiResponse = require('./model/api_response')
 
 
@@ -34,9 +35,9 @@ app.use(cors());
 
 app.use('/api/v1/auth', apiV1LoginRoute);
 app.use('/api/v1/student', apiV1StudentRoute);
-app.use('/api/v1/questions', verifyToken, apiV1QuestionsRoute);
-app.use('/api/v1/admin',verifyToken, apiV1AdminRoute);
-app.use('/api/v1/staff',verifyToken, apiV1StaffRoute);
+app.use('/api/v1/questions', headerVerifier, apiV1QuestionsRoute);
+app.use('/api/v1/admin', headerVerifier, apiV1AdminRoute);
+app.use('/api/v1/staff', headerVerifier, apiV1StaffRoute);
 
 
 // catch 404 and forward to error handler
@@ -55,34 +56,5 @@ app.use(function (err, req, res, next) {
   res.render('error');
 });
 
-//Fotrmat of token
-//Authorization : Bearer <access_token>
-function verifyToken(req, res, next) {
-  /*
-  const bearerheader = req.headers['authorization'];
-  if (typeof bearerheader != 'undefined') {
-    const bearer = bearerheader.split(' ');
-    const bearerToken = bearer[1];
-    jwt.verify(bearerToken, 'secretkey', function (err, authData) {
-      if (err){
-        apiResponse.status =403;
-        apiResponse.data ='';
-        apiResponse.message ="Access Forbidden";
-        return res.json(apiResponse)
-      }
-      else {
-        return next();
-      }
-    });
-  }
-  else {
-    apiResponse.status =403;
-    apiResponse.message ="Access Forbidden";
-    apiResponse.data="";
-    return res.json(apiResponse)
-  }
-  */
-  return next();
-}
 app.listen(3001, () => console.log("listening to port 3001"))
 module.exports = app;
