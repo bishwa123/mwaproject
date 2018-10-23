@@ -77,5 +77,13 @@ router.patch('/:id',(req,res)=>{
         }
 });
 });
+router.post('/generatetoken',(req,res)=>{
+    let {student_id, name, entry, date_of_birth} = req.body;
+    let token = jwt.createStudentToken({student_id, name, entry, date_of_birth});
+    apiResponse.status = "200";
+    apiResponse.data = token;
+    apiResponse.message = "";
+    res.json(apiResponse);
+});
 
 module.exports = router;

@@ -29,5 +29,18 @@ function createToken(user) {
       });
   return token;
 }
+function createStudentToken(student) {
+    let student_data = {
+        student_id: student.student_id, 
+        name: student.name,
+        name: student.name,
+        entry: student.entry,
+        date_of_birth: student.date_of_birth
+    }
+    var token = jsonwebtoken.sign(student_data, key.tokenKey, {
+        expiresIn: 86400 // expires in 24 hours
+      });
+  return token;
+}
 
 module.exports = jwt;
