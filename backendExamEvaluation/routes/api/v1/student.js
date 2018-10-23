@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var model = require("./../../../model/model");
 var apiResponse=require("./../../../model/api_response")
+
 router.get('/',(req,res)=>{
     model.student.find({}, (err, students)=>{
         if(err) {
@@ -16,6 +17,37 @@ router.get('/',(req,res)=>{
             return res.json(apiResponse);        }
     });
 });
+
+router.get('/unpublished',(req,res)=>{
+    model.student.find({"published":false}, (err, students)=>{
+        if(err) {
+            apiResponse.status = "500";
+            apiResponse.data = "";
+            apiResponse.message = err.message;
+            return res.json(apiResponse);
+        } else {
+            apiResponse.status = "200";
+            apiResponse.data = students;
+            apiResponse.message = "";
+            return res.json(apiResponse);        }
+    });
+});
+
+router.get('/published',(req,res)=>{
+    model.student.find({"published":true}, (err, students)=>{
+        if(err) {
+            apiResponse.status = "500";
+            apiResponse.data = "";
+            apiResponse.message = err.message;
+            return res.json(apiResponse);
+        } else {
+            apiResponse.status = "200";
+            apiResponse.data = students;
+            apiResponse.message = "";
+            return res.json(apiResponse);        }
+    });
+});
+
 router.get('/:id',(req,res)=>{
     model.student.find({_id: req.params.id}, (err, student)=>{
         if(err) {
@@ -31,6 +63,7 @@ router.get('/:id',(req,res)=>{
         }
     });
 });
+
 router.post("/", (req,res)=>{
 
     let StudentModel = model.student;
@@ -58,20 +91,39 @@ router.post("/", (req,res)=>{
 });
 
 router.patch('/:id',(req,res)=>{
-    let {name, student_id, entry, date_of_birth} = req.body;
-    model.student.update({_id: req.params.id}, {$push:{reports:req.body} }, (err, student)=>{
-        if(err) {
-            apiResponse.status = "500";
-            apiResponse.data = "";
-            apiResponse.message = err.message;
-            return res.json(apiResponse);
-        } else {
-            apiResponse.status = "200";
-            apiResponse.data = student;
-            apiResponse.message = "";
-            return res.json(apiResponse);
-        }
+    model.student.update(
+        {'_id': req.params.id, 'reports._id': req.body.report_id}, 
+        {$set :
+            {
+                'reports.$.questions.0.accepted': req.body.question1,
+                'reports.$.questions.1.accepted': req.body.question2,
+                'reports.$.questions.2.accepted': req.body.question3,
+                'published': req.body.publish,
+                'result': req.body.result
+            } 
+        },(err, student)=>{
+            if(err) {
+                apiResponse.status = "500";
+                apiResponse.data = "";
+                apiResponse.message = err.message;
+                return res.json(apiResponse);
+            } else {
+                apiResponse.status = "200";
+                apiResponse.data = student;
+                apiResponse.message = "";
+                return res.json(apiResponse);
+            }
     });
+
+    /*
+        publish: "false"
+        question1: "true"
+        question2: "false"
+        question3: "true"
+        report_id: "5bce3fc5cb45ea1868d06453"
+        result: "true"
+    */
+
 });
 
 module.exports = router;

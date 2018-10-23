@@ -43,6 +43,7 @@ router.post('/login', (req, res) => {
         });
         */
     });
+});
 
 router.post('/admincheck', (req, res) => {
     let token = req.body.token;
@@ -68,5 +69,4 @@ router.post('/admincheck', (req, res) => {
         });
 });
 
-});
 module.exports = router;

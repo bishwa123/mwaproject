@@ -1,0 +1,157 @@
+<div class="container">
+    
+  <h2> Submission Review </h2>
+
+  <table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>Student ID</th>
+            <th>Student Name</th>
+            <th>Entry</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ review?.student_id }}</td>
+            <td>{{ review?.name }}</td>
+            <td>{{ review?.entry }}</td>
+        </tr>
+    </tbody>
+  </table>
+
+  <h4> Student Answers Report </h4>
+
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+    <table class="uk-table uk-table-small uk-table-striped">
+      <tbody>
+          <tr>
+              <td>Question 1</td>
+              <td>{{ review?.reports[0]?.questions[0]?.question }}</td>
+          </tr>
+          <tr>
+            <td>Answer</td>
+            <td>{{ review?.reports[0]?.questions[0]?.answer }}</td>
+          </tr>
+          <tr>
+            <td>snapshots</td>
+            <td>
+                <div class="snapshots" *ngFor="let snapshot of review?.reports[0]?.questions[0]?.snapshots">
+                    {{ snapshot }}
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Appoved</td>
+            <td>
+              <select id="question1" name="question1" class="uk-select" formControlName="question1">
+                <option value="true">yes</option>
+                <option value="false">no</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="(control.question1.touched || control.question1.dirty) && control.question1.errors">
+                  <span class="helper-text">required *</span>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <table class="uk-table uk-table-small uk-table-striped">
+      <tbody>
+          <tr>
+              <td>Question 2</td>
+              <td>{{ review?.reports[0]?.questions[1]?.question }}</td>
+          </tr>
+          <tr>
+            <td>Answer</td>
+            <td>{{ review?.reports[0]?.questions[1]?.answer }}</td>
+          </tr>
+          <tr>
+            <td>snapshots</td>
+            <td>
+                <div class="snapshots" *ngFor="let snapshot of review?.reports[0]?.questions[0]?.snapshots">
+                    {{ snapshot }}
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Appoved</td>
+            <td>
+              <select id="question2" name="question2" class="uk-select" formControlName="question2">
+                <option value="true">yes</option>
+                <option value="false">no</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="(control.question2.touched || control.question2.dirty) && control.question2.errors">
+                  <span class="helper-text">required *</span>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+    <table class="uk-table uk-table-small uk-table-striped">
+      <tbody>
+          <tr>
+              <td>Question 3</td>
+              <td>{{ review?.reports[0]?.questions[2]?.question }}</td>
+          </tr>
+          <tr>
+            <td>Answer</td>
+            <td>{{ review?.reports[0]?.questions[2]?.answer }}</td>
+          </tr>
+          <tr>
+            <td>snapshots</td>
+            <td>
+                <div class="snapshots" *ngFor="let snapshot of review?.reports[0]?.questions[2]?.snapshots">
+                    {{ snapshot }}
+                </div>
+            </td>
+          </tr>
+          <tr>
+            <td>Appoved</td>
+            <td>
+              <select id="question3" name="question3" class="uk-select" formControlName="question3">
+                <option value="true">yes</option>
+                <option value="false">no</option>
+              </select>
+              <div class="alert alert-danger" *ngIf="(control.question3.touched || control.question3.dirty) && control.question3.errors">
+                  <span class="helper-text">required *</span>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+    <table class="uk-table uk-table-divider">
+      <tbody>
+          <tr>
+              <td>Decision (Accepted ?)</td>
+              <td>
+                <select id="result" name="result" class="uk-select" formControlName="result">
+                  <option value="true">yes</option>
+                  <option value="false">no</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="(control.result.touched || control.result.dirty) && control.result.errors">
+                  <span class="helper-text">required *</span>
+                </div>
+              </td>
+          </tr>
+          <tr>
+              <td>Publish</td>
+              <td>
+                <select id="publish" name="publish" class="uk-select" formControlName="publish">
+                  <option value="true">yes</option>
+                  <option value="false">no</option>
+                </select>
+                <div class="alert alert-danger" *ngIf="(control.publish.touched || control.publish.dirty) && control.publish.errors">
+                  <span class="helper-text">required *</span>
+                </div>
+              </td>
+          </tr>
+      </tbody>
+  </table>
+
+    <fieldset class="uk-fieldset submit">
+      <div class="uk-margin">
+          <button class="uk-button uk-button-secondary" [disabled]="!reviewForm.valid">Send</button>
+      </div>
+  </fieldset>
+  </form>
+</div>

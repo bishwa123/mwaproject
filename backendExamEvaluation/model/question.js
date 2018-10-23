@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var random = require('mongoose-simple-random');
 
 var questionSchema = new mongoose.Schema({
     category: String,
@@ -7,6 +8,8 @@ var questionSchema = new mongoose.Schema({
     created_at: Date,
     updated_at: Date
   });
+
+  questionSchema.plugin(random);
 
   questionSchema.pre('save', function(next){
     var currentDate = new Date();

@@ -2,8 +2,7 @@ var express = require("express");
 var router = express.Router();
 var model = require('./../../../model/model');
 var apiResponse = require('../../../model/api_response');
-
-
+var jwt = require('../../../libs/jwt');
 
 router.get('/',(req,res)=>{
     model.user.find({},(err,users)=>{
@@ -21,6 +20,7 @@ router.get('/',(req,res)=>{
         }
     });
 });
+
 router.get('/:id',(req,res)=>{
     model.user.findById(req.params.id,(err,users)=>{
         console.log(users)
@@ -37,6 +37,7 @@ router.get('/:id',(req,res)=>{
         }
     });
 });
+
 router.post("/", (req,res)=>{
     console.log("yaa");
     var User = new model.user({
@@ -61,21 +62,31 @@ router.post("/", (req,res)=>{
         }
     });
 });
+
 router.patch('/:id',(req,res)=>{
     let {name, password, active, is_admin} = req.body;
     model.user.update({_id: req.params.id}, {name, password, active, is_admin }, (err, data)=>{
-        if(err) {
-            apiResponse.status = "500";
-            apiResponse.data = "";
-            apiResponse.message = err.message;
-            return res.json(apiResponse);
-        } else {
-            apiResponse.status = "200";
-            apiResponse.data = data;
-            apiResponse.message = "";
-            return res.json(apiResponse);
-        }
+            if(err) {
+                apiResponse.status = "500";
+                apiResponse.data = "";
+                apiResponse.message = err.message;
+                return res.json(apiResponse);
+            } else {
+                apiResponse.status = "200";
+                apiResponse.data = data;
+                apiResponse.message = "";
+                return res.json(apiResponse);
+            }
+    });
 });
+
+router.post('/generatetoken',(req,res)=>{
+    let {student_id, name, entry, date_of_birth} = req.body;
+    let token = jwt.createStudentToken({student_id, name, entry, date_of_birth});
+    apiResponse.status = "200";
+    apiResponse.data = token;
+    apiResponse.message = "";
+    res.json(apiResponse);
 });
 
 module.exports = router;

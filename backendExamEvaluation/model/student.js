@@ -9,16 +9,16 @@ var studentSchema = new mongoose.Schema({
         {
             date:Date,
             questions:[{
-            question:String,
-            answer:String,
-            timespent:String,
-            snapshots:[],
-            timeoffbrowser:Number,
-            accepted:Boolean
-        }]
+                question:String,
+                answer:String,
+                timespent:String,
+                snapshots:[],
+                timeoffbrowser:Number,
+                accepted:Boolean
+            }]
         }
     ],
-    result:String
-
+    result: Boolean,
+    published: Boolean
 });
 module.exports = mongoose.model('students',studentSchema);

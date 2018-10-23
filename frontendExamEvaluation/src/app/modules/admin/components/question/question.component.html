@@ -4,6 +4,9 @@
             <legend class="uk-legend">Category</legend>
             <div class="uk-margin">
                 <input id="category" name="category" class="uk-input" type="text" formControlName="category">
+                <div class="alert alert-danger" *ngIf="(control.category.touched || control.category.dirty) && control.category.errors">
+                    <span class="helper-text">required *</span>
+                </div>
             </div>
         </fieldset>
         <fieldset class="uk-fieldset">
@@ -12,6 +15,9 @@
                 <textarea id="question" name="question" class="uk-textarea" rows="5" formControlName="question" 
                   placeholder="Type question ..." >
                 </textarea>
+                <div class="alert alert-danger" *ngIf="(control.question.touched || control.question.dirty) && control.question.errors">
+                    <span class="helper-text">required *</span>
+                </div>
             </div>
         </fieldset>
         <fieldset class="uk-fieldset">
@@ -22,6 +28,9 @@
                         <option value="true">Activated</option>
                         <option value="false">Disabled</option>
                     </select>
+                    <div class="alert alert-danger" *ngIf="(control.active.touched || control.active.dirty) && control.active.errors">
+                        <span class="helper-text">required *</span>
+                    </div>
                 </div>
             </div>
         </fieldset>

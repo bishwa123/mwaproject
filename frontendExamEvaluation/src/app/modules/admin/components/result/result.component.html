@@ -1,3 +1,30 @@
-<p>
-  result works!
-</p>
+<div class="container">
+    
+  <h2> Review Results  </h2>
+
+  <table class="uk-table uk-table-divider">
+    <tr *ngFor="let student of students">
+      <td>
+          <dl class="uk-description-list">
+              <dt>Student ID: {{student.student_id}}</dt>
+              <dd>
+                  name: {{student.name}}
+              </dd>
+              <dd>
+                  Entry: {{student.entry}}
+              </dd>
+              <dd>
+                  Status: 
+                  <strong *ngIf="student.result">Accepted</strong>
+                  <strong *ngIf="!student.result">Faild!</strong>
+              </dd>
+          </dl>
+      </td>
+      <td style="text-align: right;">
+        <a [routerLink]="['/admin/review', student._id]"
+        class="uk-button uk-button-default"> Edit Review </a>
+      </td>
+    </tr>
+  </table>
+
+</div>
