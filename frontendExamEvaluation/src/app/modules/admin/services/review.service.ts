@@ -14,7 +14,7 @@ export class ReviewService {
         return this.http.get(this.config.BASE_API_URL+"student/"+id);
     }
     updateStudentReport(id, body) {
-        return this.http.patch(this.config.BASE_API_URL+"student/"+id, body, {
+        return this.http.patch(this.config.BASE_API_URL+"student/edit/"+id, body, {
             headers: new HttpHeaders().set('Content-Type', 'application/json')
         });
     }

@@ -81,6 +81,7 @@ export class ExamsComponent implements OnInit {
     let browser = detect();
     if (typeof browser != "undefined" && browser.name == 'chrome') {
       this.currentRoute.params.subscribe(params => {
+        console.log('param'+params['token']);
       this.getQuesSubsrciber =  this.studentService.validateTokenandGetQuestions(params['token']).subscribe(data => {
           if (data['status'] == '200') {
             this.isLoaded = true;
@@ -131,10 +132,12 @@ export class ExamsComponent implements OnInit {
      this.exam.questions[0].snapshots.push(x);
      console.log("a "+x);
    })
-   this.answer2Subscriber = this.examForm.get('answer2').valueChanges.subscribe(x=>{
+   this.answer2Subscriber = this.examForm.get('answer2').valueChanges.pipe(debounceTime(2000)
+   ).subscribe(x=>{
     this.exam.questions[1].snapshots.push(x);
    })
-   this.answer3Subscriber =  this.examForm.get('answer3').valueChanges.subscribe(x=>{
+   this.answer3Subscriber =  this.examForm.get('answer3').valueChanges.pipe(debounceTime(2000)
+   ).subscribe(x=>{
     this.exam.questions[2].snapshots.push(x);
    })
   }
@@ -168,10 +171,15 @@ export class ExamsComponent implements OnInit {
     });
   }
   ngOnDestroy() {
-    if(typeof this.timerSubscriber != 'undefined')this.timerSubscriber.unsubscribe();
-    if(typeof this.answer1Subscriber != 'undefined')this.answer1Subscriber.unsubscribe();
-    if(typeof this.answer2Subscriber != 'undefined')this.answer2Subscriber.unsubscribe();
-    if(typeof this.answer3Subscriber != 'undefined')this.answer3Subscriber.unsubscribe();
-    if(typeof this.getQuesSubsrciber != 'undefined')this.getQuesSubsrciber.unsubscribe();
+    if(this.timerSubscriber)
+    this.timerSubscriber.unsubscribe();
+    if(this.answer1Subscriber)
+    this.answer1Subscriber.unsubscribe();
+    if(this.answer2Subscriber)
+    this.answer2Subscriber.unsubscribe();
+    if( this.answer3Subscriber)
+    this.answer3Subscriber.unsubscribe();
+    if(this.getQuesSubsrciber)
+    this.getQuesSubsrciber.unsubscribe();
   }
 }
