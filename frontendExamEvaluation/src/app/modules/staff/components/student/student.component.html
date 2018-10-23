@@ -1,0 +1,22 @@
+<table class="uk-table uk-table-striped  uk-table-hover" *ngIf ='isLoaded'>
+  <caption style="text-align:center">Students List</caption>
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Entry</th>
+          <th>Link</th>
+      </tr>
+  </thead>
+  <tfoot>
+      <tr>
+          <td></td>
+      </tr>
+  </tfoot>
+  <tbody>
+      <tr *ngFor ='let stu of students'>
+          <td>{{stu.name}}</td>
+          <td>{{stu.entry}}</td>
+          <td><button class="uk-button uk-button-primary" [id]='stu._id'>Send Invitation</button></td>
+      </tr>
+  </tbody>
+</table>
